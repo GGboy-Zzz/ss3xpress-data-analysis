@@ -1,0 +1,50 @@
+project: 293T_ss3xpress
+sequence_files:
+  file1:
+    name: /home/zhuyong/smartseq3_analysis/rawdata/20240130/reads_for_zUMIs.R1.fastq.gz
+    base_definition:
+    - cDNA(23-150)
+    - UMI(12-19)
+    find_pattern: ATTGCGCAATG,2
+  file2:
+    name: /home/zhuyong/smartseq3_analysis/rawdata/20240130/reads_for_zUMIs.R2.fastq.gz
+    base_definition: cDNA(1-150)
+  file3:
+    name: /home/zhuyong/smartseq3_analysis/rawdata/20240130/reads_for_zUMIs.index.fastq.gz
+    base_definition: BC(1-8)
+reference:
+  STAR_index: /home/zhuyong/smartseq3_analysis/ref/hg38/hg38_STAR_idx_noGTF
+  GTF_file: /home/zhuyong/smartseq3_analysis/ref/hg38/Homo_sapiens.GRCh38.111.gtf
+  additional_STAR_params: '--clip3pAdapterSeq CTGTCTCTTATACACATCT'
+  additional_files: ~
+out_dir: /home/zhuyong/smartseq3_analysis/outputs/2024.01.30/zumis
+num_threads: 16
+mem_limit: 150
+filter_cutoffs:
+  BC_filter:
+    num_bases: 3
+    phred: 20
+  UMI_filter:
+    num_bases: 2
+    phred: 20
+barcodes:
+  barcode_num: null
+  barcode_file: /home/zhuyong/smartseq3_analysis/rawdata/20240130/reads_for_zUMIs.expected_barcodes.txt
+  automatic: no
+  BarcodeBinning: 0
+  nReadsperCell: 100
+  demultiplex: no
+counting_opts:
+  introns: yes
+  downsampling: 0
+  strand: 0
+  Ham_Dist: 0
+  velocyto: yes
+  primaryHit: yes
+  twoPass: no
+make_stats: yes
+which_Stage: Filtering
+Rscript_exec: Rscript
+STAR_exec: STAR
+samtools_exec: samtools
+pigz_exec: pigz
